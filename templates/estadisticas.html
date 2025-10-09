@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Estadísticas{% endblock %}
+
+{% block content %}
+    <a href="{{ url_for('portada') }}">Volver a la portada</a>
+    <h2>Estadísticas</h2>
+
+    <div id="galeriaE"> 
+        <img src="{{ url_for('static', filename='img/grafico1.png') }}" alt="graf1">
+        <img src="{{ url_for('static', filename='img/grafico2.png') }}" alt="graf2">
+        <img src="{{ url_for('static', filename='img/grafico3.png') }}" alt="graf3">
+    </div>
+{% endblock %}

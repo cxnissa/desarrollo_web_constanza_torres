@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar Aviso{% endblock %}
+
+{% block extra_head %}
+<script src="{{ url_for('static', filename='js/region_comuna.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/agregar.js') }}" defer></script>
+{% endblock %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flash-messages">
+      {% for category, msg in messages %}
+        <li class="{{ category }}">{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+{% block content %}
+    <a href="{{ url_for('portada') }}">Volver a portada</a>
+    <h2>Nuevo aviso de adopción</h2>
+    <p>Los items marcados con un asterisco (<strong>*</strong>) son obligatorios.</p>
+    <form id="form-aviso" method="POST" action="{{ url_for('agregar') }}" enctype="multipart/form-data">
+
+        <fieldset>
+            <legend>¿Dónde?</legend>
+            <label>
+                Región<strong>*</strong> 
+                <select id="region" name="region"></select>
+            </label>
+            <label>
+                Comuna<strong>*</strong>
+                <select id="comuna" name="comuna"></select>
+            </label>
+            <label>
+                Sector
+                <input type="text" id="sector" name="sector" maxlength="100">
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Contacto</legend>
+            <label>
+                Nombre<strong>*</strong>
+                <input type="text" id="nombre" name="nombre">
+            </label>
+            <label>
+                Email<strong>*</strong>
+                <input type="email" id="email" name="email">
+            </label>
+            <label>
+                Celular
+                <input type="tel" id="celular" name="celular">
+            </label>
+            <label for="contactar_detalle">Contactar por</label>
+            <div id="contactar_detalle"></div>
+        </fieldset>
+
+        <fieldset>
+            <legend>¿Qué mascota?</legend>
+            <label>
+                Tipo<strong>*</strong>
+                <select id="tipo" name="tipo">
+                <option value="" disabled selected>Seleccione un tipo</option> 
+                <option value="gato">Gato</option>
+                <option value="perro">Perro</option>
+                <option value="otro">Otro</option>
+                </select>
+            </label>
+            <div id="tipo-extra"></div> 
+            <label>
+                Cantidad<strong>*</strong>
+                <input type="number" id="cantidad" name="cantidad">
+            </label>
+            <label>
+                Edad<strong>*</strong>
+                <input type="number" id="edad" name="edad">
+            </label>
+            <label>
+                Unidad<strong>*</strong>
+                <select id="unidad" name="unidad">
+                    <option value="" disabled selected>Seleccione una unidad</option>
+                    <option value="meses">Meses</option>
+                    <option value ="años">Años</option>
+                </select>
+            </label>
+            <label>
+                Fecha entrega<strong>*</strong>
+                <input type="datetime-local" id="fecha-entrega" name="fecha-entrega">
+            </label>
+            <label for="descripcion">
+                Descripción
+            </label>
+            <textarea id="descripcion" name="descripcion" cols="50" rows="10" placeholder="Detalles de la adopción..."></textarea>
+            <div id="fotos-input"> Fotos<strong>*</strong></div>
+        </fieldset>
+        <button type="submit">Agregar este aviso</button>
+    </form>
+
+    <div id="error-popup" class="pop-up">
+        <div class="confirmacion-contenido">
+            <h3>Errores de validación</h3>
+            <ul id="lista-errores"></ul>
+            <button id="btn-cerrar-error">Entendido</button>
+        </div>
+    </div>
+
+    <div id="confirmacion" class="pop-up">
+        <div class="confirmacion-contenido">
+            <p>¿Está seguro que desea agregar este aviso de adopción?</p>
+            <button id="btn-si">Sí, estoy seguro</button>
+            <button id="btn-no">No, quiero volver</button>
+        </div>
+    </div>
+{% endblock %}
