@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+<script src="{{ url_for('static', filename='js/listado.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/detalle.js') }}" defer></script>
+{% endblock %}
+
+{% block title %}Detalle Aviso {{ aviso.id }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('listado') }}">← Volver al listado</a>
+<h2>Detalle del aviso</h2>
+
+<p><strong>Publicación:</strong> {{ aviso.fecha_ingreso.strftime("%Y-%m-%d %H:%M") }}</p>
+<p><strong>Entrega:</strong> {{ aviso.fecha_entrega.strftime("%Y-%m-%d %H:%M") }}</p>
+<p><strong>Comuna:</strong> {{ aviso.comuna.nombre }}</p>
+<p><strong>Sector:</strong> {{ aviso.sector }}</p>
+<p><strong>Tipo:</strong> {{ aviso.tipo.value }} {% if aviso.tipo_otro %} ({{ aviso.tipo_otro}}) {% endif %}</p>
+<p><strong>Cantidad:</strong> {{ aviso.cantidad }}</p>
+<p><strong>Edad:</strong> {{ aviso.edad }} {{ aviso.unidad_medida }}</p>
+<p><strong>Contacto:</strong> {{ aviso.nombre }} ({{ aviso.email }})</p>
+
+{% if aviso.contactos %}
+<p><strong>Otros Medios de Contacto:</strong></p>
+<ul>
+  {% for c in aviso.contactos %}
+    <li>{{ c.nombre }}: {{ c.identificador }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% if aviso.fotos %}
+<div id="galeria">
+    {% for foto in aviso.fotos %}
+    <img src="{{ url_for('static', filename=foto.ruta_archivo) }}" width="200" height="150">
+    {% endfor %}
+</div>
+{% else %}
+    <p>(Sin fotos)</p>
+{% endif %}
+
+<hr style="margin-top: 30px;">
+<h2>Comentarios</h2>
+
+<form id="form-comentario" data-aviso-id="{{ aviso.id }}">
+    <fieldset>
+        <legend>Deja un comentario</legend>
+
+        <div id="errores-comentario" style="color: rgb(239, 71, 71); margin-bottom: 10px;"></div>
+
+        <label>
+            Nombre<strong>*</strong> (3-80 caracteres)
+            <input type="text" id="comentario-nombre" name="nombre" required minlength="3" maxlength="80">
+        </label>
+        <label>
+            Comentario<strong>*</strong> (mín. 5 caracteres)
+            <textarea id="comentario-texto" name="texto" rows="4" required minlength="5"></textarea>
+        </label>
+        <button type="submit">Agregar comentario</button>
+    </fieldset>
+</form>
+
+<div id="lista-comentarios" style="margin-top: 20px;">
+    <p>Cargando comentarios...</p>
+</div>
+
+{% endblock %}

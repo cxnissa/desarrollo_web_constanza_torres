@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="{{ url_for('static', filename='js/estadisticas.js') }}" defer></script>
+{% endblock %}
+
+{% block title %}Estadísticas{% endblock %}
+
+{% block content %}
+    <a href="{{ url_for('portada') }}">Volver a la portada</a>
+    <h2>Estadísticas</h2>
+    
+    <div id="chart-linea" style="width:75%; height: 400px; margin: 0 auto 25px auto;"></div>
+    <div id="chart-torta" style="width:75%; height: 400px; margin: 0 auto 25px auto;"></div>
+    <div id="chart-barras" style="width:75%; height: 400px; margin: 0 auto;"></div>
+
+{% endblock %}
