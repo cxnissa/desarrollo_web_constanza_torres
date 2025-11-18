@@ -24,3 +24,7 @@ Para esta tarea, se implementó la arquitectura **Modelo-Servicio-Controlador**
 
 * **Controladores (`/controller`):**
     * Se decidió separar las responsabilidades en dos controladores, siguiendo el patrón de la auxiliar
+
+---
+
+El desarollo de la T4 se encuentra en la carpeta `adopciones` mientras que la pagina que se tenía de la tarea previa se encuentra en `T3`, ambas cuentan con un hyperlink hacía la otra que solo funciona si ambas estan corriendo a la vez :) 
