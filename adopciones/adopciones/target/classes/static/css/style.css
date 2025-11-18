@@ -1,0 +1,293 @@
+/* general */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #fff7fa;
+  color: #444;
+  padding: 20px;
+}
+
+header {
+  background: linear-gradient(135deg, #ffafcc, #ffc8dd);
+  color: #4a4a4a;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav a {
+  color: #4a4a4a;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+nav a:hover {
+  background-color: #ffe5ec;
+  text-decoration: none;
+}
+
+main {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+
+th, td {
+  border: 1px solid #f3d1e3;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #ffe5ec;
+  color: #4a4a4a;
+}
+
+tr:nth-child(even) {
+  background-color: #fff0f5;
+}
+
+tr:hover {
+  background-color: #ffeaf4;
+  cursor: pointer;
+}
+
+/* para tabla de portada :) */
+.center {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* agregar */
+form fieldset {
+  border: 2px solid #ffc8dd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fffafc;
+}
+
+form legend {
+  font-weight: bold;
+  color: #d63384;
+}
+
+form label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+input, select, textarea, button {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px;
+  font-size: 0.95rem;
+  border: 1px solid #e6b8c7;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* listado */
+#tabla-avisos th:nth-child(5),
+#tabla-avisos td:nth-child(5) {
+  width: 110px;
+}
+
+/* botones */
+button {
+  width: auto;
+  background-color: #ffafcc;
+  color: #4a4a4a;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+  background-color: #ffbcd9;
+  transform: scale(1.05);
+}
+
+
+/* galeria para listado */
+#galeria {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+#galeria img {
+  border: 3px solid #ffd6e0;
+  border-radius: 10px;
+  transition: transform 0.2s;
+}
+
+#galeria img:hover {
+  transform: scale(1.08);
+}
+
+/* galeria para estadisticas */
+#galeriaE {
+  display: flex;
+  gap: 12px;
+  flex-wrap: nowrap;
+  margin-top: 15px;
+}
+
+#galeriaE img {
+  max-width: 30%;
+  height: auto;
+  border: 3px solid #ffd6e0;
+  border-radius: 10px;
+  transition: transform 0.2s;
+}
+
+#galeriaE img:hover {
+  transform: scale(1.08);
+}
+
+/* enlaces */
+a {
+  color: #d63384;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* overlay al apretar foto de detalle de avisos */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay-content {
+  position: relative;
+}
+
+.overlay-content img {
+  width: 800px;
+  height: 600px;
+}
+
+.overlay-content button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  padding: 6px 12px;
+}
+
+/* pop up de confirmación de agregar aviso */
+.pop-up {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  display: none; /* oculto al inicio */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.confirmacion-contenido {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  text-align: center;
+}
+
+.pop-up.activo {
+  display: flex;
+}
+
+/* pop up de errores, en reemplazo de alert */
+#error-popup .confirmacion-contenido {
+    background: #f8d7da;
+    color: #721c24;
+    border: 2px solid #f5c6cb;
+}
+
+#error-popup .confirmacion-contenido h3 {
+    margin: 0 0 15px 0;
+    color: #721c24;
+}
+
+#error-popup .confirmacion-contenido ul {
+    margin: 0 0 15px 0;
+    padding-left: 20px;
+    text-align: left;
+}
+
+#error-popup .confirmacion-contenido button {
+    display: block;
+    margin: 15px auto 0 auto;
+    background: #dc3545;
+    color: white;
+
+}
+
+#error-popup .confirmacion-contenido button:hover {
+    background: #c82333;
+}

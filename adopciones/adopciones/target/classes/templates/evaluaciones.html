@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Evaluación de avisos</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <h1>Sistema de Evaluaciones</h1>
+</header>
+
+<main>
+    <div style="margin-bottom: 20px;">
+        <!-- link al sistema de python flask -->
+        <a href="http://localhost:5000/listado" style="font-size: 1.15rem;">
+            ← Volver al Listado Principal
+        </a>
+    </div>
+    <h2>Listado de Avisos</h2>
+    <p>Haz clic en "evaluar" para agregar una nota del 1 al 7.</p>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha Publicación</th>
+            <th>Sector</th>
+            <th>Cantidad, Tipo, Edad</th>
+            <th>Comuna</th>
+            <th>Nota</th>
+            <th>Evaluar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- itera sobre los avisos que vienen del controller -->
+        <tr th:each="aviso : ${avisos}">
+
+            <td th:text="${aviso.id}">1</td>
+            <td th:text="${aviso.fechaPublicacion}">2025-06-02</td>
+            <td th:text="${aviso.sector}">Beauchef</td>
+            <td th:text="${aviso.cantidadTipoEdad}">1 gato 2 meses</td>
+            <td th:text="${aviso.comunaNombre}">Santiago</td>
+
+            <!-- data-aviso-id se usa en js para identificar qué aviso evaluar -->
+            <td class="celda-nota" th:data-aviso-id="${aviso.id}" th:text="${aviso.notaPromedio}">-</td>
+
+            <td>
+                <button class="btn-evaluar" th:data-aviso-id="${aviso.id}">
+                    evaluar
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- popup que se muestra/oculta con js -->
+    <div id="nota-popup" class="pop-up">
+        <div class="confirmacion-contenido">
+            <h3>Ingresar Nota</h3>
+            <p>Por favor, ingrese una nota del 1 al 7.</p>
+
+            <input type="number" id="nota-input" min="1" max="7" placeholder="Escriba la nota aquí..."/>
+            <div id="nota-error" style="color: rgb(239, 71, 71); margin-top: 10px;"></div>
+
+            <div style="display: flex; justify-content: center; gap: 10px; margin-top: 15px;">
+                <button id="btn-submit-nota">Guardar Nota</button>
+                <button id="btn-cancelar-nota" style="background-color: #aaa;">Cancelar</button>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+<script th:src="@{/js/evaluacion.js}" defer></script>
+</body>
+</html>
